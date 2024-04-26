@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400..700&family=Madimi+One&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Outfit;
+}
+
+#root {
+    display: flex;
+    min-height: 100vh;
+    background: #131314;
+}
+
+img {
+    filter: invert();
+}
+
+.main-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-width: 900px;
+    padding: 0px 20px;
+    margin: auto;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #1e1f20;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.search-box img {
+    width: 24px;
+    cursor: pointer;
+}
+
+.result::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* .loader hr {
+    border-radius: 4px;
+    border: none;
+    background: linear-gradient(to right, #43a0e3, #ffffff, #040b0f);
+    background-color: #131314;
+    background-size: 800px 50px;
+    height: 20px;
+    animation: gradientAnimation 1s linear infinite;
+} */
+
+
+/* @keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+} */
