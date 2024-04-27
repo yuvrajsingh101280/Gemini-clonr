@@ -12,25 +12,48 @@ const ContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState("");
 
-  const delayPara = (index, nextword) => {};
+  const delayPara = (index, nextword) => {
+    setTimeout(function () {
+      setResultData((prev) => prev + nextword);
+    }, 75 * index);
+  };
+
+  const newChat = () => {
+    setLoading(false);
+    setShowResult(false);
+  };
 
   const onSent = async (prompt) => {
     setResultData("");
     setLoading(true);
     setShowResult(true);
-    setRecentPrompt(Input);
-    const response = await runChat(Input);
-    // let responseArray = response.split("**");
-    // let newResponse;
-    // for (let i = 0; i < responseArray.length; i++) {
-    //   if ((i = 0 || i % 2 !== 1)) {
-    //     newResponse += responseArray[i];
-    //   } else {
-    //     newResponse += "<b>" + responseArray[i] + "</b>";
-    //   }
-    // }
+    let response;
+    if (prompt !== undefined) {
+      response = await runChat(prompt);
+      setRecentPrompt(prompt);
+    } else {
+      setPreviousPrompt((prev) => [...prev, Input]);
+      setRecentPrompt(Input);
+      response = await runChat(Input);
+    }
 
-    setResultData(response);
+    let responseArray = response.split("**");
+    let newResponse = " ";
+    for (let i = 0; i < responseArray.length; i++) {
+      if (i === 0 || i % 2 !== 1) {
+        newResponse += responseArray[i];
+      } else {
+        newResponse += "<strong>" + responseArray[i] + "</strong>";
+      }
+    }
+
+    let newResponse2 = newResponse.split("*").join("</br>");
+
+    let newResponseArrray = newResponse2.split(" ");
+    for (let i = 0; i < newResponseArrray.length; i++) {
+      const nextWord = newResponseArrray[i];
+      delayPara(i, nextWord + " ");
+    }
     setLoading(false);
     setInput("");
   };
@@ -46,6 +69,7 @@ const ContextProvider = (props) => {
     Input,
     setInput,
     showResult,
+    newChat,
   };
   return (
     <Context.Provider value={contextValue}>{props.children}</Context.Provider>
